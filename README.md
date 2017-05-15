@@ -6,7 +6,7 @@ Generates secure IDs for people. Built for [Something New](https://somethingnew.
 
 As the treasurer of an political party, I want to [publish all our finances as open data](https://somethingnew.org.uk/about/finances/). In this data, it's useful to be able to see who is making donations, how often, and of what size.
 
-We ask if we can make donor names public, but no everyone wishes to do so, as is their right. Therefore for users of open data to be able to track donations over time, we need a stable identifier for individuals which is not relatable to their personal data.
+We ask if we can make donor names public, but not everyone wishes to do so, as is their right. Therefore for users of the open data to be able to track donations over time, we need a stable identifier for individuals which is not relatable to their personal data.
 
 We wish to avoid simply minting a random ID for each user, because in order to reuse those IDs, we will have to keep them in a database, which if leaked would allow donation details to be linked to real people.
 
@@ -20,7 +20,7 @@ Anonymous IDs consist of the first 10 characters of a salted SHA-512 hash of the
 
 We combine the data as "{name} <{email}> {salt}", generate a SHA-512 hex digest, and use the first 10 characters as the ID.
 
-The salt is stored in a secure password database, but even if the salt is leaked the hashes could not be reverse engineered to obtain input data, though if possible input data was known it would be possible to verify if a person was a donor.
+The salt is stored in a secure password database along with other party credentials, but even if the salt is leaked the hashes could not be reverse engineered to obtain input data, though if possible input data was known it would be possible to verify if a person was a donor.
 
 ### Public IDs
 
