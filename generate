@@ -1,0 +1,29 @@
+#! /usr/bin/env ruby
+require 'thor'
+require 'digest'
+
+class Generate < Thor
+
+  desc "anon NAME EMAIL [SALT]", "generate an anonymous ID for a person"
+  def anon(name, email, salt=ENV['ID_GENERATOR_SALT'])
+    puts hash(name, email, salt)
+  end
+
+  desc "public NAME EMAIL [SALT]", "generate a pubic ID for a person"
+  def public(name, email, salt=ENV['ID_GENERATOR_SALT'])
+    puts "#{name} #{hash(name, email, salt)}"
+  end
+
+private
+
+  def hash(name, email, salt)
+    sha = Digest::SHA2.new(512)    
+    sha << name
+    sha << email
+    sha << salt
+    sha.hexdigest.slice(0,10)
+  end
+
+end
+
+Generate.start(ARGV)
