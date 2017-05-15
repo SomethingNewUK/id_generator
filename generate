@@ -18,9 +18,7 @@ private
 
   def hash(name, email, salt)
     sha = Digest::SHA2.new(512)    
-    sha << name
-    sha << email
-    sha << salt
+    sha << "#{name} <#{email}> #{salt}"
     sha.hexdigest.slice(0,10)
   end
 

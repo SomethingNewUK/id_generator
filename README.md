@@ -12,14 +12,16 @@ Public IDs consist of the given name, plus the anonymous ID above.
 
 ## Usage:
 
+Pass name, email, and a salt value to the `anon` or `public` generators, then use the result instead of the name.
+
 ```
 $ bundle
 
-$ bundle exec ./generate anon "James Smith" james@floppy.org.uk ChauJe6dee6foo3sheeXag6Uu
->> d17397628f
+$ bundle exec ./generate anon "James Smith" james@example.com ChauJe6dee6foo3sheeXag6Uu
+>> 8f6b0c9338
 
-$ bundle exec ./generate public "James Smith" james@floppy.org.uk ChauJe6dee6foo3sheeXag6Uu
->> James Smith d17397628f
+$ bundle exec ./generate public "James Smith" james@example.com ChauJe6dee6foo3sheeXag6Uu
+>> James Smith 8f6b0c9338
 ```
 
 To avoid passing the salt every time, you can also put it in an a `ID_GENERATOR_SALT` environment variable:
@@ -27,6 +29,6 @@ To avoid passing the salt every time, you can also put it in an a `ID_GENERATOR_
 ```
 $ export ID_GENERATOR_SALT=ChauJe6dee6foo3sheeXag6Uu
 
-$ bundle exec ./generate public "James Smith" james@floppy.org.uk
->> James Smith d17397628f
+$ bundle exec ./generate public "James Smith" james@example.com
+>> James Smith 8f6b0c9338
 ```
